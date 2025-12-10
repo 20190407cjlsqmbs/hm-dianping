@@ -26,7 +26,12 @@ public class MvcConfig implements WebMvcConfigurer {
                         "/shop/**",
                         "/blog/hot",
                         "/user/code",
-                        "/user/login"
+                        "/user/login",// Swagger / SpringDoc 相关路径放行
+                        "/v3/api-docs/**",
+                        "/swagger-ui/**",
+                        "/swagger-ui.html",
+                        "/doc.html", // 如果使用了 knife4j 也要加上
+                        "/webjars/**"
                         )
                 .order(1);
         // token 刷新拦截器
