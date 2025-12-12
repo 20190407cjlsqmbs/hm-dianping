@@ -45,6 +45,10 @@ public class VoucherOrderControllerTest {
     @Test
     @SneakyThrows
     @DisplayName("登录1000个用户，并输出到文件中")
+    /**
+     * 修改 /user/code，让它把验证码返回 data
+     * Result.ok(code);
+     */
     void login() {
         List<String> phoneList = userService.lambdaQuery()
                 .select(User::getPhone)
