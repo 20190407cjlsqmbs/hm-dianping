@@ -26,6 +26,7 @@ public class MvcConfig implements WebMvcConfigurer {
                         "/shop/**",
                         "/blog/hot",
                         "/user/code",
+//                        "/user/me",
                         "/user/login",// Swagger / SpringDoc 相关路径放行
                         "/v3/api-docs/**",
                         "/swagger-ui/**",

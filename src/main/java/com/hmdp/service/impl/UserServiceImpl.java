@@ -58,7 +58,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         // 5.发送验证码
         log.debug("发送短信验证码成功，验证码：{}", code);
         // 返回ok
-        return Result.ok(code);
+        return Result.ok();
         // 测试多并发获取多个token使用： 修改 /user/code，让它把验证码返回 data
     }
 
@@ -114,6 +114,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         user.setNickName(USER_NICK_NAME_PREFIX + RandomUtil.randomString(10));
         // 保存用户
         save(user);
-        return null;
+        return user;
     }
 }

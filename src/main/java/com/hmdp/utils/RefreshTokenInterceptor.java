@@ -3,6 +3,7 @@ package com.hmdp.utils;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
 import com.hmdp.dto.UserDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 public class RefreshTokenInterceptor implements HandlerInterceptor {
 
     private StringRedisTemplate stringRedisTemplate;
@@ -31,6 +33,8 @@ public class RefreshTokenInterceptor implements HandlerInterceptor {
         Map<Object, Object> userMap = stringRedisTemplate.opsForHash().entries(key);
         // 3.判断用户是否存在
         if (userMap.isEmpty()) {
+            //  在这里增加一条警告日志！！！
+            log.error("认证失败：收到了一个非空的Token，但在Redis中未找到对应的用户信息。Token: {}, Request URI: {}", token, request.getRequestURI());
             return true;
         }
         // 5.将查询到的hash数据转为UserDTO
